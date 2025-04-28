@@ -28,3 +28,18 @@ atacarConPoderEspecial personaje contrincantes
 estaEnLasUltimas :: Personaje -> Bool
 estaEnLasUltimas = (> 800) . obtenerVida
 
+--
+
+quitarVida :: Int -> Personaje -> Personaje
+quitarVida aRestar (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida)
+  | cantidadDeVida <= aRestar = (nombre, poderBasico, superPoder, superPoderActivo, 0)
+  | otherwise = (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida-aRestar)
+
+matarPersonaje :: Personaje -> Personaje
+matarPersonaje = quitarVida (obtenerVida personaje)
+
+sumarVida :: Personaje -> Int -> Personaje
+sumarVida (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) aSumar = (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida + aSumar)
+
+bolaEspinosa :: Personaje -> Personaje
+bolaEspinosa = quitarVida 1000
