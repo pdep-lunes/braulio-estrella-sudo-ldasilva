@@ -43,3 +43,17 @@ sumarVida (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) aS
 
 bolaEspinosa :: Personaje -> Personaje
 bolaEspinosa = quitarVida 1000
+
+
+-- lluviaDeTuercasSanadoras :: Personaje -> Personaje -> Personaje ->
+
+desactivarSuperPoder :: Personaje -> Personaje
+
+agregarEnNombreEspinas :: Personaje -> Personaje
+agregarEnNombreEspinas (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) = (nombre ++ " Espinas estuvo aqui", poderBasico, superPoder, superPoderActivo, cantidadDeVida)
+
+granadaDeEspinas :: Int -> Personaje -> Personaje
+granadaDeEspinas radio contrincante
+  | radio > 3 && estaEnLasUltimas personaje = (agregarEnNombreEspinas . desactivarSuperPoder . matarPersonaje) personaje
+  | radio > 3 =
+  | otherwise = bolaEspinosa contrincante
