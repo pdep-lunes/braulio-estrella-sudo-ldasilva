@@ -15,10 +15,15 @@ type Equipo = (Personaje, Personaje)
 obtenerVida :: Personaje -> Int
 obtenerVida (_, _, _, _, cantidadDeVida) = cantidadDeVida
 
+tieneSuperPoderActivo :: Personaje -> Bool
+tieneSuperPoderActivo (_, _, superPoderActivo, _) = superPoderActivo
+
 ---
 
 atacarConPoderEspecial :: Personaje -> Equipo -> Equipo
--- atacarConPoderEspecial personaje contrincantes = 
+atacarConPoderEspecial personaje contrincantes
+  | tieneSuperPoderActivo personaje = atacaContrincantes personaje contrincantes
+  | otherwise = contrincantes
 
 estaEnLasUltimas :: Personaje -> Bool
 estaEnLasUltimas = (> 800) . obtenerVida
