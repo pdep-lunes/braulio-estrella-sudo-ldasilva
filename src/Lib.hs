@@ -80,7 +80,7 @@ atacarConPoder atacante poder atacado
   | poder == "bola espinosa" = bolaEspinosa atacado
   | poder == "lluvia de tuercas sanadoras" = lluviaDeTuercas "sanadoras" atacante
   | poder == "lluvia de tuercas dañinas" = lluviaDeTuercas "dañinas" atacado
-  -- No puedo usar granada de espinas por que no se el radio
+  -- No puedo usar granada de espinas por que no se el radio ¿Cómo puedo hacer sino?
   -- | poder == "granada de espinas" = granadaDeEspinas atacado
   | poder == "torreta curativa" = torretaCurativa atacado
 
