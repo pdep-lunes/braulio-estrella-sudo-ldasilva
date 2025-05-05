@@ -9,7 +9,6 @@ type SuperPoderActivo = Bool
 type CantidadDeVida = Int
 
 type Personaje = (Nombre, PoderBasico, SuperPoder, SuperPoderActivo, CantidadDeVida)
-type Equipo = (Personaje, Personaje)
 
 activarSuperPoder :: Personaje -> Personaje
 activarSuperPoder (nombre, poderBasico, superPoder, _, cantidadDeVida) = (nombre, poderBasico, superPoder, True, cantidadDeVida)
@@ -23,13 +22,9 @@ obtenerVida (_, _, _, _, cantidadDeVida) = cantidadDeVida
 tieneSuperPoderActivo :: Personaje -> Bool
 tieneSuperPoderActivo (_, _, _, superPoderActivo, _) = superPoderActivo
 
----
 obtenerSuperPoder :: Personaje -> SuperPoder
 obtenerSuperPoder (_, _, superPoder, _, _) = superPoder
 
-
-estaEnLasUltimas :: Personaje -> Bool
-estaEnLasUltimas = (> 800) . obtenerVida
 obtenerPoderBasico :: Personaje -> PoderBasico
 obtenerPoderBasico (_, poderBasico, _, _, _) = poderBasico
 
@@ -78,3 +73,6 @@ atacarConPoderEspecial :: Personaje -> Personaje -> Personaje
 atacarConPoderEspecial personaje contrincante
   | tieneSuperPoderActivo personaje = (atacarConPoder personaje (obtenerPoderBasico personaje).atacarConPoder personaje (obtenerSuperPoder personaje)) contrincante
   | otherwise = contrincante
+
+estaEnLasUltimas :: Personaje -> Bool
+estaEnLasUltimas = (> 800) . obtenerVida
