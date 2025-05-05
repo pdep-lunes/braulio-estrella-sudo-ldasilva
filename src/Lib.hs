@@ -36,7 +36,7 @@ quitarVida aRestar (nombre, poderBasico, superPoder, superPoderActivo, cantidadD
   | otherwise = (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida-aRestar)
 
 matarPersonaje :: Personaje -> Personaje
-matarPersonaje = quitarVida (obtenerVida personaje)
+matarPersonaje personaje = quitarVida (obtenerVida personaje) personaje
 
 sumarVida :: Personaje -> Int -> Personaje
 sumarVida (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) aSumar = (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida + aSumar)
