@@ -91,3 +91,11 @@ atacarConPoderEspecial personaje contrincante
 
 estaEnLasUltimas :: Personaje -> Bool
 estaEnLasUltimas = (> 800) . obtenerVida
+
+--
+
+espina :: Personaje
+espina = ("Espina", "bola de espinas", "granada de espinas de 5 metros de radio", True, 4800)
+
+pamela :: Personaje
+pamela = ("Pamela", "lluvia de tuercas sanadoras", "torreta curativa", False, 9600)
