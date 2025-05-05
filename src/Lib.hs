@@ -44,10 +44,20 @@ sumarVida (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) aS
 bolaEspinosa :: Personaje -> Personaje
 bolaEspinosa = quitarVida 1000
 
+---
 
--- lluviaDeTuercasSanadoras :: Personaje -> Personaje -> Personaje ->
+esTuercaSanadora :: String -> Bool
+esTuercaSanadora =  (==) "sanadora"
 
-desactivarSuperPoder :: Personaje -> Personaje
+esTuercaDaninas :: String -> Bool
+esTuercaDaninas =  (==) "dañinas"
+
+lluviaDeTuercas :: String -> Personaje -> Personaje
+lluviaDeTuercas tipoDeTuercas personaje
+  | esTuercaSanadora tipoDeTuercas = sumarVida personaje 800
+  | esTuercaDaninas tipoDeTuercas = quitarVida ((div 2).obtenerVida $ personaje) personaje
+
+---
 
 agregarEnNombreEspinas :: Personaje -> Personaje
 agregarEnNombreEspinas (nombre, poderBasico, superPoder, superPoderActivo, cantidadDeVida) = (nombre ++ " Espinas estuvo aqui", poderBasico, superPoder, superPoderActivo, cantidadDeVida)
