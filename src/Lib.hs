@@ -70,6 +70,11 @@ granadaDeEspinas radio contrincante
 
 ---
 
+torretaCurativa :: Personaje -> Personaje
+torretaCurativa aliado = (activarSuperPoder.sumarVida aliado.(*2).obtenerVida) aliado
+
+---
+
 atacarConPoder :: Personaje -> String -> Personaje -> Personaje
 atacarConPoder atacante poder atacado
   | poder == "bola espinosa" = bolaEspinosa atacado
