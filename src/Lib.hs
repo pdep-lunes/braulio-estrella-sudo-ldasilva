@@ -64,8 +64,8 @@ agregarEnNombreEspinas (nombre, poderBasico, superPoder, superPoderActivo, canti
 
 granadaDeEspinas :: Int -> Personaje -> Personaje
 granadaDeEspinas radio contrincante
-  | radio > 3 && estaEnLasUltimas personaje = (agregarEnNombreEspinas . desactivarSuperPoder . matarPersonaje) personaje
-  | radio > 3 =
+  | radio > 3 && estaEnLasUltimas contrincante = (agregarEnNombreEspinas . desactivarSuperPoder . matarPersonaje) contrincante
+  | radio > 3 = agregarEnNombreEspinas contrincante
   | otherwise = bolaEspinosa contrincante
 
 ---
