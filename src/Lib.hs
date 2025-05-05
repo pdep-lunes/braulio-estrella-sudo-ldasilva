@@ -11,22 +11,27 @@ type CantidadDeVida = Int
 type Personaje = (Nombre, PoderBasico, SuperPoder, SuperPoderActivo, CantidadDeVida)
 type Equipo = (Personaje, Personaje)
 
+activarSuperPoder :: Personaje -> Personaje
+activarSuperPoder (nombre, poderBasico, superPoder, _, cantidadDeVida) = (nombre, poderBasico, superPoder, True, cantidadDeVida)
+
+desactivarSuperPoder :: Personaje -> Personaje
+desactivarSuperPoder (nombre, poderBasico, superPoder, _, cantidadDeVida) = (nombre, poderBasico, superPoder, False, cantidadDeVida)
 
 obtenerVida :: Personaje -> Int
 obtenerVida (_, _, _, _, cantidadDeVida) = cantidadDeVida
 
 tieneSuperPoderActivo :: Personaje -> Bool
-tieneSuperPoderActivo (_, _, superPoderActivo, _) = superPoderActivo
+tieneSuperPoderActivo (_, _, _, superPoderActivo, _) = superPoderActivo
 
 ---
+obtenerSuperPoder :: Personaje -> SuperPoder
+obtenerSuperPoder (_, _, superPoder, _, _) = superPoder
 
-atacarConPoderEspecial :: Personaje -> Equipo -> Equipo
-atacarConPoderEspecial personaje contrincantes
-  | tieneSuperPoderActivo personaje = atacaContrincantes personaje contrincantes
-  | otherwise = contrincantes
 
 estaEnLasUltimas :: Personaje -> Bool
 estaEnLasUltimas = (> 800) . obtenerVida
+obtenerPoderBasico :: Personaje -> PoderBasico
+obtenerPoderBasico (_, poderBasico, _, _, _) = poderBasico
 
 --
 
@@ -57,3 +62,19 @@ granadaDeEspinas radio contrincante
   | radio > 3 && estaEnLasUltimas personaje = (agregarEnNombreEspinas . desactivarSuperPoder . matarPersonaje) personaje
   | radio > 3 =
   | otherwise = bolaEspinosa contrincante
+
+---
+
+atacarConPoder :: Personaje -> String -> Personaje -> Personaje
+atacarConPoder atacante poder atacado
+  | poder == "bola espinosa" = bolaEspinosa atacado
+  | poder == "lluvia de tuercas sanadoras" = lluviaDeTuercas "sanadoras" atacante
+  | poder == "lluvia de tuercas dañinas" = lluviaDeTuercas "dañinas" atacado
+  -- No puedo usar granada de espinas por que no se el radio
+  -- | poder == "granada de espinas" = granadaDeEspinas atacado
+  | poder == "torreta curativa" = torretaCurativa atacado
+
+atacarConPoderEspecial :: Personaje -> Personaje -> Personaje
+atacarConPoderEspecial personaje contrincante
+  | tieneSuperPoderActivo personaje = (atacarConPoder personaje (obtenerPoderBasico personaje).atacarConPoder personaje (obtenerSuperPoder personaje)) contrincante
+  | otherwise = contrincante
