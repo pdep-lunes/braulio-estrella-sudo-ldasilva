@@ -76,13 +76,12 @@ torretaCurativa aliado = (activarSuperPoder.sumarVida aliado.(*2).obtenerVida) a
 ---
 
 atacarConPoder :: Personaje -> String -> Personaje -> Personaje
-atacarConPoder atacante poder atacado
-  | poder == "bola espinosa" = bolaEspinosa atacado
-  | poder == "lluvia de tuercas sanadoras" = lluviaDeTuercas "sanadoras" atacante
-  | poder == "lluvia de tuercas dañinas" = lluviaDeTuercas "dañinas" atacado
-  -- No puedo usar granada de espinas por que no se el radio ¿Cómo puedo hacer sino?
-  -- | poder == "granada de espinas" = granadaDeEspinas atacado
-  | poder == "torreta curativa" = torretaCurativa atacado
+atacarConPoder _ "bola espinosa" atacado = bolaEspinosa atacado
+atacarConPoder atacante "lluvia de tuercas sanadoras" _ = lluviaDeTuercas "sanadoras" atacante
+atacarConPoder _ "lluvia de tuercas dañinas" atacado = lluviaDeTuercas "dañinas" atacado
+atacarConPoder _ "torreta curativa" atacado = torretaCurativa atacado
+atacarConPoder _ "granada de espinas" atacado = granadaDeEspinas 5 atacado
+-- No puedo usar granada de espinas por que no se el radio ¿Cómo puedo hacer sino?
 
 atacarConPoderEspecial :: Personaje -> Personaje -> Personaje
 atacarConPoderEspecial personaje contrincante
